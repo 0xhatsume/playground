@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from "styled-components";
 import { useWeb3React } from '@web3-react/core';
 import { shortenAddress } from "../../utils";
@@ -31,14 +32,23 @@ export const Button = styled.button`
 `;
 
 export default () => {
-    const { account, active, error } = useWeb3React()
-
+    const { account, active, error, deactivate } = useWeb3React()
+    const [showDialog, setShowDialog] = useState(false);
     return (
         <TopPanel>
-            <Button>
-                { account ? shortenAddress(account) : "Connect to Wallet"}
+            <Button onClick={()=>{ 
+                if(!active){
+                    setShowDialog(true);
+                } else {
+                    deactivate();
+                }
+                    }
+                }>
+                { account ? shortenAddress(account) : 
+                    'Connect Wallet'
+                }
             </Button>
-            <WalletModal/>
+            <WalletModal showDialog={showDialog} setShowDialog={setShowDialog} />
         </TopPanel>
     )
 };

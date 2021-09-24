@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 
@@ -162,7 +162,7 @@ const IconWrapper = styled.div<{ size?: number | null }>`
 `
 
 
-export default function WalletModal(
+export default function WalletModal({showDialog, setShowDialog}
     // {
     // pendingTransactions,
     // confirmedTransactions,
@@ -177,7 +177,7 @@ export default function WalletModal(
         // important that these are destructed from the account-specific web3-react context
         const { active, account, connector, activate, error } = useWeb3React()
 
-        const [showDialog, setShowDialog] = useState(true);
+        //const [showDialog, setShowDialog] = useState(true);
         const open = () => setShowDialog(true);
         const close = () => setShowDialog(false);
 
